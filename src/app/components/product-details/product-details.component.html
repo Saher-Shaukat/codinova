@@ -1,0 +1,53 @@
+<div class="products-detail">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Products</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td
+          class="no-product bg-white"
+          colspan="5"
+          *ngIf="!cartItems.length"
+        >
+          There are no products
+        </td>
+      </tr>
+      <tr class="bg-white" *ngFor="let product of cartItems; let i = index">
+        <td>
+          <button type="button" class="cross" (click)="removeProduct(i)">
+            x
+          </button>
+        </td>
+        <td>{{ product?.name }}</td>
+        <td>{{ product?.price }}</td>
+        <td>
+          <div class="quantity">
+            <button
+              type="button"
+              class="btn-increment"
+              (click)="decrementQuantity(i)"
+            >
+              -
+            </button>
+            <input type="number" [value]="product?.quantity" readonly />
+            <button
+              type="button"
+              class="btn-increment"
+              (click)="incrementQuantity(i)"
+            >
+              +
+            </button>
+          </div>
+        </td>
+        <td>{{ product?.price * product?.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

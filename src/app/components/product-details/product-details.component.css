@@ -1,0 +1,53 @@
+.no-product {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.products-detail table td.no-product.bg-white {
+  padding: 20px;
+}
+
+.cross {
+  width: 20px;
+  height: 20px;
+  line-height: 5px;
+  font-size: 14px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: rgb(199, 15, 15);
+  color: white;
+  border: 0;
+  outline: none;
+}
+
+.quantity input {
+  width: 20px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  padding: 3px;
+  margin: 0 3px;
+}
+
+.products-detail {
+  overflow-y: auto;
+  height: 500px;
+}
+
+.products-detail table {
+  border-spacing: 0 0.5em;
+  width: 100%;
+  /* min-height: 400px;
+    max-height: 500px; */
+}
+
+.products-detail table td {
+  padding: 10px;
+}
+
+.btn-increment {
+  background-color: #9e9898;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  text-transform: capitalize;
+}

@@ -1,0 +1,60 @@
+<div class="popup">
+    <div class="modalContainer">
+      <header>
+        <h2>Receipt</h2>
+        <button type="button" (click)="closePopup()">x</button>
+      </header>
+      <section class="modal-body bg-white">
+        <div class="cart-detail">
+          <h3>Sale No.:.: 00102</h3>
+          <table>
+            <caption>
+              Date: {{now | date:'medium'}}
+            </caption>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Products</th>
+                <th>Quantity</th>
+                <th>SubTotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white" *ngFor="let cartProduct of cartItems;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{cartProduct?.name}}</td>
+                <td>{{cartProduct?.quantity}}</td>
+                <td>{{cartProduct?.price}} INR</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <div class="cartTotalTable">
+          <table width="100%">
+            <tbody>
+              <tr>
+                <td>Total Items</td>
+                <td>{{totalQuantity}}</td>
+                <td>Total</td>
+                <td>{{total + vat/100*total - discount/100*total | number: "1.0-3" }} INR</td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td>Discount</td>
+                <td>{{discount}}%</td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td>Vat</td>
+                <td>{{vat}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer class="modal-footer bg-white">
+        <button type="button" class="modal-cancel bg-white" (click)="closePopup()">Close</button>
+      </footer>
+    </div>
+  </div>

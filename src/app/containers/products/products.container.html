@@ -1,0 +1,92 @@
+<div class="container">
+  <h1 class="heading">Main Screen</h1>
+  <div class="row">
+    <div class="left-container">
+      <app-product-details
+        [cartItems]="cartProducts"
+        (decreaseQty)="decrementQuantity($event)"
+        (increaseQty)="incrementQuantity($event)"
+        (deleteProduct)="removeProduct($event)"
+      ></app-product-details>
+      <div class="total">
+        <table width="100%">
+          <tbody>
+            <tr>
+              <td>Sub Total</td>
+              <td>{{ total | number: "1.0-2" }} EUR</td>
+              <td align="right">{{ cartProducts.length }} items</td>
+            </tr>
+            <tr>
+              <td>VAT tax</td>
+              <td>
+                <span class="percent"
+                  ><input type="number" [(ngModel)]="vatPercent" />%</span
+                >
+              </td>
+              <td align="right">{{ VAT | number: "1.0-2" }} EUR</td>
+            </tr>
+            <tr>
+              <td>Discount</td>
+              <td>
+                <span class="percent"
+                  ><input type="number" [(ngModel)]="discountPercent" />%</span
+                >
+              </td>
+              <td align="right">{{ discount | number: "1.0-2" }} EUR</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td colspan="2">
+                {{ total + VAT - discount | number: "1.0-2" }} EUR
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="cancel" (click)="cancelSale()">
+          Cancel Sale
+        </button>
+        <button
+          type="button"
+          class="proceed"
+          (click)="showHideModal(true)"
+          [disabled]="cartProducts.length === 0"
+        >
+          Process Sale
+        </button>
+      </div>
+    </div>
+    <div class="right-container">
+      <div class="card">
+        <ul>
+          <li
+            class="orange"
+            *ngFor="let product of productsList; let j = index"
+            (click)="onAddToCart(product, j)"
+          >
+            <img
+              src="assets/images/{{ product.image }}"
+              *ngIf="product.image"
+            />
+
+            <div class="product-price">
+              <h3>{{ product?.name }}</h3>
+              <strong>{{ product?.price }} EUR</strong>
+              <p>{{ product?.description }}...</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-process-sale
+  *ngIf="showPopup"
+  [total]="total"
+  [vat]="vatPercent"
+  [discount]="discountPercent"
+  [cartItems]="cartProducts"
+  (showModal)="showHideModal($event)"
+></app-process-sale>

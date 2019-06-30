@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+button {
+  outline: none;
+  border: 0;
+}
+
+thead {
+  text-transform: uppercase;
+}
+
+th {
+  padding: 5px;
+}
+.bg-white {
+  background-color: white;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
