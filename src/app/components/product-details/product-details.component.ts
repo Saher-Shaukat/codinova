@@ -9,23 +9,23 @@ import { Product } from "src/app/_model/product";
 export class ProductDetailsComponent implements OnInit {
   @Input() cartItems: Product[] = [];
 
-  @Output() decreaseQty = new EventEmitter<number>();
+  @Output() decreaseQty = new EventEmitter<{}>();
   @Output() increaseQty = new EventEmitter<number>();
-  @Output() deleteProduct = new EventEmitter<number>();
+  @Output() deleteProduct = new EventEmitter<{}>();
 
   constructor() {}
 
   ngOnInit() {}
 
-  decrementQuantity(index) {
-    this.decreaseQty.emit(index);
+  decrementQuantity(index, product) {
+    this.decreaseQty.emit({ index: index, product: product });
   }
 
   incrementQuantity(index) {
     this.increaseQty.emit(index);
   }
 
-  removeProduct(index){
-    this.deleteProduct.emit(index);
+  removeProduct(index, product) {
+    this.deleteProduct.emit({ index: index, product: product });
   }
 }

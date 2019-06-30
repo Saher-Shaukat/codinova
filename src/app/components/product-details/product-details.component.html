@@ -21,7 +21,7 @@
       </tr>
       <tr class="bg-white" *ngFor="let product of cartItems; let i = index">
         <td>
-          <button type="button" class="cross" (click)="removeProduct(i)">
+          <button type="button" class="cross" (click)="removeProduct(i, product)">
             x
           </button>
         </td>
@@ -32,7 +32,7 @@
             <button
               type="button"
               class="btn-increment"
-              (click)="decrementQuantity(i)"
+              (click)="decrementQuantity(i, product)"
             >
               -
             </button>

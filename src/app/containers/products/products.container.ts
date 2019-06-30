@@ -10,7 +10,7 @@ import { Product } from "src/app/_model/product";
 
 /**
  * @author Saher Shaukat
- * @description Container to make API calls and display Product List
+ * @description Container for Product List
  */
 export class ProductsContainer implements OnInit, AfterContentChecked {
   // Global Variables
@@ -61,21 +61,21 @@ export class ProductsContainer implements OnInit, AfterContentChecked {
 
   /**
    * @description Decrease quantity for added products
-   * @param product Current product details
-   * @param index Current product index
+   * @param productObj contains product detail and index
    */
-  decrementQuantity(index) {
+  decrementQuantity(productObj) {
+    let index = productObj.index;
     this.cartProducts[index].quantity--;
 
     //remove from cart if quantity becomes '0'
     if (this.cartProducts[index].quantity == 0) {
-      this.removeProduct(index);
+      this.removeProduct(productObj);
     }
   }
 
   /**
    * @description Increase quantity for added products
-   * @param product Current product details
+   * @param index Current product index
    */
   incrementQuantity(index) {
     this.cartProducts[index].quantity++;
@@ -83,10 +83,19 @@ export class ProductsContainer implements OnInit, AfterContentChecked {
 
   /**
    * @description Remove cart items
-   * @param index ProductToRemove index
+   * @param productObj contains product detail and index
    */
-  removeProduct(index) {
-    this.cartProducts.splice(index, 1);
+  removeProduct(productObj) {
+    let currentProduct = productObj.product;
+    let currentIndex = productObj.index;
+
+    for (let index = 0; index < this.productsList.length; index++) {
+      if (this.productsList[index].id == currentProduct.id) {
+        this.productsList[index].quantity = 0;
+        break;
+      }
+    }
+    this.cartProducts.splice(currentIndex, 1);
   }
 
   /**
@@ -99,11 +108,12 @@ export class ProductsContainer implements OnInit, AfterContentChecked {
   }
 
   /**
-   * @description Close Popup
+   * @description Open/Close Popup & clear cart on popup close
+   * @param event true-to show popup, false-to hide popup
    */
   showHideModal(event) {
     this.showPopup = event;
-    if(!event) {
+    if (!event) {
       this.cancelSale();
     }
   }

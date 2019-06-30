@@ -26,9 +26,9 @@ describe("ProductDetailsComponent", () => {
     // spy on event emitter
     spyOn(component.decreaseQty, "emit");
 
-    component.decrementQuantity(0);
+    component.decrementQuantity(0, {});
 
-    expect(component.decreaseQty.emit).toHaveBeenCalledWith(0);
+    expect(component.decreaseQty.emit).toHaveBeenCalledWith({index: 0, product: {}});
   });
 
   it("should emit increment event on increment", () => {
@@ -44,8 +44,8 @@ describe("ProductDetailsComponent", () => {
     // spy on event emitter
     spyOn(component.deleteProduct, "emit");
 
-    component.removeProduct(0);
+    component.removeProduct(0,{});
 
-    expect(component.deleteProduct.emit).toHaveBeenCalledWith(0);
+    expect(component.deleteProduct.emit).toHaveBeenCalledWith({index: 0, product: {}});
   });
 });
